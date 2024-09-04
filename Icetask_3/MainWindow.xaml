@@ -1,0 +1,111 @@
+﻿<Window x:Class="Icetask_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Icetask_3"
+        mc:Ignorable="d"
+        Title="Smart Home Management" Height="450" Width="800"
+        Background="#F7F8FA">
+    <!-- Light grey background for a neutral, professional look -->
+
+    <Window.Resources>
+        <!-- TextBox Style -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <!-- Softer border color -->
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+        </Style>
+
+        <!-- ComboBox Style -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+        </Style>
+
+        <!-- Button Style -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#0078D7"/>
+            <!-- Blue background for primary actions -->
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="BorderBrush" Value="#005A9E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                        </Border>
+                        <!-- Adding hover effect -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                                <Setter Property="BorderBrush" Value="#004080"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ListBox Style -->
+        <Style TargetType="ListBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="10,10,10,0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Controls for Adding and Managing Devices -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Center">
+            <TextBox x:Name="DeviceIdTextBox" Width="200" Margin="0,0,10,0" ToolTip="Enter Device ID" TextChanged="DeviceIdTextBox_TextChanged"/>
+            <!-- Added Tooltip for hint -->
+
+            <!-- ComboBox for Device Status -->
+            <ComboBox x:Name="StatusComboBox" Width="150" Margin="0,0,10,0" ToolTip="Select Device Status" SelectionChanged="StatusComboBox_SelectionChanged">
+                <ComboBoxItem Content="On"/>
+                <ComboBoxItem Content="Off"/>
+            </ComboBox>
+
+            <!-- Action Buttons -->
+            <Button Content="Add Device" Click="AddDevice_Click" ToolTip="Add new device to the list"/>
+            <Button Content="Update Status" Click="UpdateStatus_Click" ToolTip="Update the selected device status"/>
+            <Button Content="Remove Device" Click="RemoveDevice_Click" ToolTip="Remove selected device from the list"/>
+        </StackPanel>
+
+        <!-- ListBox to Display Devices -->
+        <ListBox x:Name="DevicesListBox" Grid.Row="1" Margin="0,0,0,10" ToolTip="List of managed devices" SelectionChanged="DevicesListBox_SelectionChanged"/>
+    </Grid>
+</Window>
